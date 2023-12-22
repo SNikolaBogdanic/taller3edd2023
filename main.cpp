@@ -8,7 +8,7 @@
 
 using namespace std;
 
-// Estructura para representar un nodo en el grafo
+/* Estructura para representar un nodo en el grafo
 class Nodo {
     private:
         int id;
@@ -121,13 +121,13 @@ class Arista {
 
 
 
-// Estructura para representar una conexion en el grafo
+*/
 
 
 // Implementacion de las funciones para leer archivos CSV
 vector<Nodo*> leerNodosDesdeCSV(bool showcase) {
     vector<Nodo*> nodos;
-    ifstream file("servidores.csv");
+    ifstream file("servidores.txt");
     
     if (file.is_open()) {
         string line;
@@ -169,7 +169,7 @@ vector<Nodo*> leerNodosDesdeCSV(bool showcase) {
 
 vector<Arista*> leerConexionesDesdeCSV(vector<Nodo*> nodos) {
     vector<Arista*> conexiones;
-    ifstream file("conexiones.csv");
+    ifstream file("conexiones.txt");
 
     if (file.is_open()) {
         string line;
