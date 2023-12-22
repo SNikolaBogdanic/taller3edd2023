@@ -8,6 +8,8 @@
 #include <cmath>
 #include "Arista.h"
 
+using namespace std;
+
 // Estructura para representar un nodo en el grafo
 class Nodo {
     private:

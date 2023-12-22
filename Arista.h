@@ -8,12 +8,14 @@
 #include <cmath>
 #include "Nodo.h"
 
+using namespace std;
+
 //Estructura que define una conexion
 class Arista {
     private:
         Nodo* nodo1;
         Nodo* nodo2;
-        int velocidad; //Máxima cantidad de MB que permite a la vez.
+        int velocidad; //Mï¿½xima cantidad de MB que permite a la vez.
         int costo_efectivo; //Segundos que tarda un paquete X en transmitirse.
         int distancia; //Segundos de latencia de transferencia de un paquete.
         bool hn1;

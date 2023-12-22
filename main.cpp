@@ -5,6 +5,8 @@
 #include <limits>
 #include <map>
 #include <cmath>
+#include "Nodo.h"
+#include "Arista.h"
 
 using namespace std;
 
@@ -37,7 +39,7 @@ class Arista {
     private:
         Nodo* nodo1;
         Nodo* nodo2;
-        int velocidad; //Máxima cantidad de MB que permite a la vez.
+        int velocidad; //Mï¿½xima cantidad de MB que permite a la vez.
         int costo_efectivo; //Segundos que tarda un paquete X en transmitirse.
         int distancia; //Segundos de latencia de transferencia de un paquete.
         bool hn1;
@@ -193,29 +195,28 @@ vector<Arista*> leerConexionesDesdeCSV(vector<Nodo*> nodos) {
             }
 
             // Verificar si los nodos existen antes de crear la arista
-            if (nodosPorID.count(idClienteInt) && nodosPorID.count(idServidorInt)) {
+            if (nodosPorID.count(idClienteInt) && nodosPorID.count(idRouterInt)) {
                 Arista* conexion = new Arista(
-                    nodosPorID[idClienteInt],
-                    nodosPorID[idServidorInt],
                     velocidadInt,
-                    distanciaInt
-                );
+                    distanciaInt,
+                    nodosPorID[idClienteInt],
+                    nodosPorID[idRouterInt]
+                    );
                 conexiones.push_back(conexion);
                 nodosPorID[idClienteInt]->conectar(conexion);
-                nodosPorID[idServidorInt]->conectar(conexion);
+                nodosPorID[idRouterInt]->conectar(conexion);
             }
             
         }
 
         file.close();
     } else {
-        cerr << "Error al abrir el archivo: " << archivo << endl;
+        cerr << "Error al abrir el archivo." << endl;
     }
 
     return conexiones;
 }
 
-*/
 
 int main() {
 
@@ -309,7 +310,7 @@ int main() {
             }
             
             //Verifica que el destinatario exista en la lista de conexiones del router
-            if (!router->checkConexion(destinatario->getID()){
+            if (!router->checkConexion(destinatario->getID())){
                //go to bellmanford;
                cout << "Error: El nodo no esta conectado al mismo router. Envio de paquetes entre routers WIP." << endl;
                break;
@@ -319,10 +320,10 @@ int main() {
             vector<Arista*> conx = router->getConexiones();
             
             for (Arista* auxist : conx){
-                if (auxist->checkNodo(destinatario->getID()){
+                if (auxist->checkNodo(destinatario->getID())){
                    cout << "Destinatario encontrado en red local." << endl;
                    cout << "Router intermediario: "<< router->getNombre() << "." << endl;
-                   cout << "Latencia total de la conexión: "<<
+                   cout << "Latencia total de la conexiï¿½n: "<<
                    (remitente->getConexion()->getCostoEfectivo() + destinatario->getConexion()->getCostoEfectivo())<<
                    " segundos."<<endl;
                    break;
